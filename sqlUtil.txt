@@ -1,0 +1,83 @@
+chmod -R 777 html
+cambiar permisos
+
+parar apache
+sudo systemctl stop apache2
+
+acceder a mysql desde contenedor
+mysql -u root -p
+
+MIGRACIONES SEEDERS Y FACTORY:
+php artisan make:seeder CocheSeeder
+php artisan make:factory CocheFactory --model=Coche
+php artisan db:seed --class=CocheSeeder
+
+ELOQUENT:
+Insertar un nuevo registro de un coche:
+$coche = new Coche();
+$coche->name = 'Nombre del coche';
+$coche->brand = 'Marca del coche';
+$coche->model = 'Modelo del coche';
+$coche->year = 'Año del coche';
+$coche->save();
+
+Borrar el registro insertado:
+$coche = Coche::where('name', 'Nombre del coche')->first();
+$coche->delete();
+
+Listar todos los modelos de una marca ordenados descendentemente:
+$coches = Coche::where('brand', 'Marca deseada')->orderBy('model', 'desc')->get();
+
+
+USE: Selecciona una base de datos específica para trabajar con ella.
+USE nombre_de_la_basededatos;
+
+
+SHOW TABLES: Muestra una lista de todas las tablas en la base de datos actual.
+SHOW TABLES;
+
+
+DESCRIBE: Muestra la estructura de una tabla, incluyendo los nombres de las columnas y los tipos de datos.
+DESCRIBE nombre_de_la_tabla;
+
+Mostrar una tabla.
+SELECT * FROM nombre_de_la_tabla;
+
+
+
+-- Crear una nueva base de datos
+CREATE DATABASE nombre_de_la_basededatos;
+
+-- Eliminar una base de datos existente
+DROP DATABASE nombre_de_la_basededatos;
+
+-- Crear una nueva tabla en una base de datos
+CREATE TABLE nombre_de_la_tabla (
+    columna1 tipo_de_dato,
+    columna2 tipo_de_dato,
+    ...
+);
+
+-- Modificar la estructura de una tabla existente
+ALTER TABLE nombre_de_la_tabla ADD columna tipo_de_dato;
+
+-- Eliminar una tabla existente de la base de datos
+DROP TABLE nombre_de_la_tabla;
+
+-- Insertar nuevos registros en una tabla
+INSERT INTO nombre_de_la_tabla (columna1, columna2, ...) VALUES (valor1, valor2, ...);
+
+-- Recuperar datos de una o más tablas
+SELECT columna1, columna2 FROM nombre_de_la_tabla WHERE condicion;
+
+-- Actualizar registros existentes en una tabla
+UPDATE nombre_de_la_tabla SET columna1 = valor1, columna2 = valor2 WHERE condicion;
+
+-- Eliminar registros de una tabla
+DELETE FROM nombre_de_la_tabla WHERE condicion;
+
+-- Otorgar permisos a los usuarios de MySQL
+GRANT tipo_de_permiso ON nombre_de_la_tabla TO 'usuario'@'host';
+
+-- Revocar permisos de los usuarios de MySQL
+REVOKE tipo_de_permiso ON nombre_de_la_tabla FROM 'usuario'@'host';
